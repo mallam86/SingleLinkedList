@@ -218,15 +218,18 @@ namespace SingleLinkedList
         }
 
 
-        public void testDetectLoop()
+        public void TestDetectLoop()
         {
             Single_LinkedList<int> list = new Single_LinkedList<int>();
             list.InsertAtHead(1);
             list.InsertAtHead(2);
             list.InsertAtHead(3);
+            list.printList();
             Console.WriteLine("Before adding loop: " + Single_LinkedList<int>.DetectLoop(list));
             list.headNode.nextNode = list.headNode;
             Console.WriteLine("After adding loop: " + Single_LinkedList<int>.DetectLoop(list));
+
+
         }
 
         public static Object findMiddle(Single_LinkedList<T> list)
@@ -244,6 +247,9 @@ namespace SingleLinkedList
             return JumpOne.Data;
         }
 
+        /// <summary>
+        /// Remove from sorted list using in-place algo
+        /// </summary>
         public void RemoveDuplicatesFromSortedLinkedList()
         {
             if (IsEmpty())
@@ -263,9 +269,9 @@ namespace SingleLinkedList
                 secondPointer = secondPointer.nextNode;
             }
         }
-      
 
-        public static void RemoveDuplicatesAndAddResultInAnotherList(Single_LinkedList<T> list)
+
+        public static void RemoveDuplicatesAndSaveResultInAnotherList(Single_LinkedList<T> list)
         {
             if (list.IsEmpty())
                 return;
@@ -302,86 +308,12 @@ namespace SingleLinkedList
                 list.InsertAtEnd(newH.Data);
                 newH = newH.nextNode;
             }
-            
+
 
         }
 
-        //4-> 2321 -> 55 -> 1000 -> null
-        //1000 -> 55 -> 4 -> 2321 -> null
-        //2321 -> 4 -> 55 -> 1000 -> null
-
-        //1000->55->4->2321->55-> null
-        public static void removeDuplicates(Single_LinkedList<T> list)
-        {
-            if (list.IsEmpty())
-                return;
-            Single_LinkedList<T>.Node first = list.headNode;
-            while (first != null)
-            {
-                Single_LinkedList<T>.Node second = first;
-                Single_LinkedList<T>.Node third = first.nextNode;
-
-                while (second != null && third != null)
-                {
-                    if (first.Data.Equals(third.Data))
-                    {
-                        second.nextNode = third.nextNode;
-                        if (second.nextNode == null)
-                            break;
-                    }
-                    second = third;
-                    third = third.nextNode;
-                }
-                first = first.nextNode;
-            }
-        }
-        public void printList2()
-        {
-            if (IsEmpty())
-            {
-                Console.WriteLine("List is Empty!");
-                return;
-            }
-
-            Node temp = headNode;
-            Console.WriteLine("List : ");
-
-            while (temp.nextNode != null)
-            {
-                Console.WriteLine(temp.Data + " -> ");
-                temp = temp.nextNode;
-            }
-
-            Console.WriteLine(temp.Data + " -> null");
-        }
-
-        //1000->55->4->2321->55-> null
-        public static void removeDuplicates2(Single_LinkedList<T> list)
-        {
-            Single_LinkedList<T>.Node current = list.headNode; // will be used for outer loop
-            Single_LinkedList<T>.Node compare = null;     // will be used for inner loop
-
-            while (current != null && current.nextNode != null)
-            {
-                compare = current;
-                while (compare.nextNode != null)
-                {
-                    if (current.Data.Equals(compare.nextNode.Data))
-                    { //check if duplicate
-                        compare.nextNode = compare.nextNode.nextNode;
-                    }
-                    else
-                    {
-                        compare = compare.nextNode;
-                    }
-                }
-                current = current.nextNode;
-            }
-        }
-
-        //1000->55->4->2321->55-> null
-
-        public static void removeDuplicates3(Single_LinkedList<T> list)
+        //Use Inner loop.
+        public static void RemoveDuplicates(Single_LinkedList<T> list)
         {
             if (list.IsEmpty())
                 return;
@@ -404,9 +336,7 @@ namespace SingleLinkedList
             }
         }
 
-        //1 -> 2
-        //3 -> 4 -> 2
-        public static Single_LinkedList<T> union(Single_LinkedList<T> list1, Single_LinkedList<T> list2)
+        public static Single_LinkedList<T> Union(Single_LinkedList<T> list1, Single_LinkedList<T> list2)
         {
             if (list1.IsEmpty())
                 return list2;
@@ -439,24 +369,24 @@ namespace SingleLinkedList
             return unionList;
         }
 
-        public static Single_LinkedList<T> intersection(Single_LinkedList<T> list1, Single_LinkedList<T> list2)
+        public static Single_LinkedList<T> Intersection(Single_LinkedList<T> list1, Single_LinkedList<T> list2)
         {
             Single_LinkedList<T> result = new Single_LinkedList<T>();
 
             if (list1.Size > list2.Size)
             {
-                result = intersect(list2, list1);
+                result = Intersect(list2, list1);
             }
             else
             {
-                result = intersect(list1, list2);
+                result = Intersect(list1, list2);
 
             }
 
             return result;
         }
 
-        private static Single_LinkedList<T> intersect(Single_LinkedList<T> list1, Single_LinkedList<T> list2)
+        private static Single_LinkedList<T> Intersect(Single_LinkedList<T> list1, Single_LinkedList<T> list2)
         {
             Single_LinkedList<T> result = new Single_LinkedList<T>();
 
@@ -478,32 +408,6 @@ namespace SingleLinkedList
             return result;
         }
 
-        public static T nthElementFromEnd(Single_LinkedList<T> list, int n)
-        {
 
-            int counter = 1;
-
-            Single_LinkedList<T>.Node node = list.headNode;
-            Single_LinkedList<T> newList = new Single_LinkedList<T>();
-
-            while (node != null)
-            {
-                newList.InsertAtHead(node.Data);
-                node = node.nextNode; 
-
-            }
-            while (newList != null)
-            {
-                if (counter == n)
-                {
-                    break;
-                }
-                node = node.nextNode;
-                counter++;
-
-            }
-
-            return node.Data;
-        }
     }
 }
