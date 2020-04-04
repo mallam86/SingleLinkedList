@@ -137,7 +137,6 @@ namespace SingleLinkedList
         public int Length()
         {
             int count = 0;
-            // Write -- Your -- Code
             if (this.headNode == null)
                 return 0;
             else
@@ -154,7 +153,6 @@ namespace SingleLinkedList
 
         public static Single_LinkedList<T> Reverse(Single_LinkedList<T> list)
         {
-            //Write -- Your -- Code
             if (list == null) return null;
             Single_LinkedList<T> newList = null;
             Node tmp = list.headNode;
@@ -182,22 +180,7 @@ namespace SingleLinkedList
             return newList;
         }
 
-        //public static Boolean detectLoop(Single_LinkedList<T> list)
-        //{
-        //    if (list == null) return false;
-        //    Single_LinkedList<T>.Node h = list.headNode;
-        //    h.Data = list.headNode.Data;
-        //    h.nextNode = list.headNode.nextNode;
-
-        //    Single_LinkedList<T>.Node tmp = list.headNode;
-        //    while (tmp != null)
-        //    {
-        //        if (tmp.nextNode == h)
-        //            return true;
-        //        tmp = tmp.nextNode;
-        //    }
-        //    return false;
-        //}
+     
 
         public static Boolean DetectLoop(Single_LinkedList<T> list)
         {
